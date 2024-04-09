@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index Page</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="header" class="hidden">
+        <h1>TITOLO</h1>
+<img src="geolier.png" alt="immagine del cantante">
+
+<hr>
+</div>
+
+
+    <div id="televota" class="hidden">
+        <h1>Vota Geolier!</h1>
+        <button href="index.html">VOTA ORA</button>
+        <hr>
+    </div>
+
+
+    <div id="news" class="hidden">
+        <h1>L'articolo sul cantante</h1>
+        <h2>è stato bravissimo</h2>
+        <p>descrizione dell'esibizione</p>
+        
+<hr>
+    </div>
+ 
+    <div id="album" class="hidden">
+        <h1>PRENOTA IL NUOVO ALBUM</h1>
+        <h2>Autografato</h2>
+        <button href="index.html"> pre-order </button>
+        
+<hr>
+    </div>
+
+    <div id="singolo" class="hidden">
+        <h1>ASCOLTA IL NUOVO SINGOLO</h1>
+        <h2>I p me tu p te</h2>
+        <button href="index.html"> ASCOLTA </button>
+        
+<hr>
+    </div>
+
+
+    <script>
+        function getParams() {
+            const urlSearchParams = new URLSearchParams(window.location.search);
+            return Object.fromEntries(urlSearchParams.entries());
+        }
+
+        const params = getParams();
+        for (const key in params) {
+            if (params[key] === '1') {
+                document.getElementById(key)?.classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
