@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="home.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+</head>
+<body>
+    <div id="parallax-container">
+        <div class="square1"></div>
+        <div class="circle"></div>
+        <div class="circle1"></div>
+        <div class="square"></div>
+        <div class="square1"></div>
+        <div class="circle"></div>
+        <div class="circle1"></div>
+        <div class="square"></div>        
+        <div class="square1"></div>
+        <div class="circle"></div>
+        <div class="circle1"></div>
+        <div class="square"></div>
+    </div>
+    
+    
+</body>
+<script>
+
+$(document).ready(function() {
+    $('#parallax-container').mousemove(function(e) {
+        const x = e.pageX - $(this).offset().left;
+        const y = e.pageY - $(this).offset().top;
+        const centerX = $(this).width() / 3;
+        const centerY = $(this).height() / 2;
+
+        const deltaX = (x - centerX) * 0.5;
+        const deltaY = (y - centerY) * 0.5;
+
+        $('.circle').css('transform', `translate(${deltaX}px, ${deltaY}px)`);
+        $('.square').css('transform', `translate(${-deltaX}px, ${-deltaY}px)`);
+        $('.square1').css('transform', `translate(${-deltaX*1.5}px, ${deltaY}px)`);
+
+    });
+});
+
+// Controlla se l'evento deviceorientation è supportato
+if (window.DeviceOrientationEvent) {
+    window.addEventListener('deviceorientation', function(event) {
+        const alpha = event.alpha; // Rotazione attorno all'asse z
+        const beta = event.beta; // Rotazione attorno all'asse x
+        const gamma = event.gamma; // Rotazione attorno all'asse y
+
+        // Calcola un valore di spostamento basato su beta e gamma
+        const moveX = gamma; // Spostamento orizzontale
+        const moveY = beta; // Spostamento verticale
+
+        $('.circle').css('transform', `translate(${moveX}px, ${moveY}px)`);
+        $('.square').css('transform', `translate(${-moveX*1.5}px, ${-moveY}px)`);
+        $('.square1').css('transform', `translate(${-moveX*1.5}px, ${moveY}px)`);
+    });
+} else {
+    console.log("Device orientation not supported");
+}
+
+
+</script>
+</html>
